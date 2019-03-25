@@ -20,7 +20,7 @@ const uploadPictures = (req, res, next) => {
       cloudinary.v2.uploader.upload(
         picture,
         {
-          public_id: `leboncoin-api/userId-${req.user._id}/${random}`
+          public_id: `portfolio/userId-${req.user._id}/${random}`
         },
         (error, result) => {
           // console.log(result, error);
