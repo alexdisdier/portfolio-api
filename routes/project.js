@@ -5,11 +5,14 @@
 const express = require("express");
 const router = express.Router();
 
+const isAuthenticated = require("../middlewares/isAuthenticated");
+// const uploadPictures = require("../middlewares/uploadPictures");
+
 const Project = require("../models/project");
 
 // CREATE
-// params body: title, subtitle(fr, en), description(fr, en), tags
-router.post("/project/create", async (req, res, next) => {
+// params body: title, subtitle(fr, en), overview(fr, en), features(fr, en), technologies, pictures, url, code, creator
+router.post("/project/create", isAuthenticated, async (req, res, next) => {
   try {
     const existingProject = await Project.findOne({
       title: req.body.title
@@ -18,11 +21,15 @@ router.post("/project/create", async (req, res, next) => {
     if (existingProject === null) {
       const newProject = new Project({
         title: req.body.title,
+        duration: req.body.duration,
         subtitle: req.body.subtitle,
-        description: req.body.description,
+        overview: req.body.overview,
+        features: req.body.features,
+        technologies: req.body.technologies,
         pictures: req.body.pictures,
         url: req.body.url,
-        tags: req.body.tags
+        code: req.body.code,
+        creator: req.user
       });
 
       await newProject.save();
