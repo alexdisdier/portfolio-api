@@ -76,7 +76,7 @@ router.post("/user/create", async (req, res) => {
 });
 
 // READ
-router.get("/user/read", isAuthenticated, async (req, res) => {
+router.get("/user", isAuthenticated, async (req, res) => {
   try {
     const users = await User.find();
     const count = await User.countDocuments();
