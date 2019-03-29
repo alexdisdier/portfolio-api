@@ -56,7 +56,7 @@ router.post("/project/create", isAuthenticated, async (req, res, next) => {
 
 // READ
 // params query: title, subtitle(fr, en), description(fr, en), tags
-router.get("/project/read", async (req, res) => {
+router.get("/projects", async (req, res) => {
   try {
     const search = await Project.find();
 

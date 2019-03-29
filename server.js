@@ -27,7 +27,10 @@ mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost/portfolio`, {
 
 app.get("/", (req, res) => {
   res.send({
-    message: "homepage"
+    home: {
+      message: "Welcome to AD API",
+      projectsRoute: "/projects"
+    }
   });
 });
 
