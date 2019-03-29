@@ -33,9 +33,11 @@ app.get("/", (req, res) => {
 
 const projectRoutes = require("./routes/project");
 const userRoutes = require("./routes/user");
+const sendMail = require("./routes/sendMail");
 
 app.use(projectRoutes);
 app.use(userRoutes);
+app.use(sendMail);
 
 /////////////////////
 // STARTING SERVER //

@@ -5,9 +5,13 @@ const User = mongoose.model("User", {
   lastname: String,
   email: String,
   phone: String,
-  socialNetworks: {
-    type: Array,
-    of: Object
+  socialMedia: {
+    type: Object,
+    of: String
+  },
+  cv: {
+    type: Object,
+    of: String
   },
   description: {
     type: Object,

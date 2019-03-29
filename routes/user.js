@@ -21,7 +21,8 @@ router.post("/user/create", async (req, res) => {
     const password = req.body.password;
 
     const phone = req.body.phone;
-    const socialNetworks = req.body.socialNetworks;
+    const socialMedia = req.body.socialMedia;
+    const cv = req.body.cv;
     const description = req.body.description;
     const subtitle = req.body.subtitle;
     const contactText = req.body.contactText;
@@ -30,11 +31,13 @@ router.post("/user/create", async (req, res) => {
     const token = uid2(16);
     const salt = uid2(16);
     const hash = SHA256(password + salt).toString(encBase64);
-    const userExist = await User.findOne({ email: email });
+    // const userExist = await User.findOne({ email: email });
+    const count = await User.countDocuments();
+    console.log(count);
 
-    if (userExist !== null) {
+    if (count > 0) {
       res.json({
-        error: "email already exists"
+        error: "only one account allowed, mine"
       });
     } else {
       if (
@@ -42,7 +45,7 @@ router.post("/user/create", async (req, res) => {
         lastname &&
         email &&
         phone &&
-        socialNetworks &&
+        socialMedia &&
         description &&
         password
       ) {
@@ -54,7 +57,8 @@ router.post("/user/create", async (req, res) => {
           salt: salt,
           hash: hash,
           phone: phone,
-          socialNetworks: socialNetworks,
+          socialMedia: socialMedia,
+          cv: cv,
           description: description,
           subtitle: subtitle,
           contactText: contactText,
