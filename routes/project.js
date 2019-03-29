@@ -59,8 +59,12 @@ router.post("/project/create", isAuthenticated, async (req, res, next) => {
 router.get("/projects", async (req, res) => {
   try {
     const search = await Project.find();
+    const count = await Project.countDocuments();
 
-    res.json(search);
+    res.json({
+      "number of projects": count,
+      projects: search
+    });
   } catch (error) {
     res.status(400).json({
       error: {
