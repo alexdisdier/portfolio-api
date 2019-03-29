@@ -78,20 +78,21 @@ router.post("/user/create", async (req, res) => {
 // READ
 router.get("/user", async (req, res) => {
   try {
-    const user = await User.find({ email: "alexdisdier@gmail.com" });
+    const user = await User.find();
     const count = await User.countDocuments();
+    const me = user[0];
 
     if (count > 0) {
       res.json({
-        firstname: user.firstname,
-        lastname: user.lastname,
-        email: user.email,
-        socialMedia: user.socialMedia,
-        cv: user.cv,
-        description: user.description,
-        subtitle: user.subtitle,
-        contactText: user.contactText,
-        profile: user.profile
+        firstname: me.firstname,
+        lastname: me.lastname,
+        email: me.email,
+        socialMedia: me.socialMedia,
+        cv: me.cv,
+        description: me.description,
+        subtitle: me.subtitle,
+        contactText: me.contactText,
+        profile: me.profile
       });
     } else {
       res.json({

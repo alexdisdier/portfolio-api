@@ -29,6 +29,7 @@ app.get("/", (req, res) => {
   res.send({
     home: {
       message: "Welcome to AD API",
+      userInfo: "/user",
       projectsRoute: "/projects"
     }
   });
